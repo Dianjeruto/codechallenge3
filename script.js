@@ -1,41 +1,38 @@
-const film = document.querySelector('p')
-const list = document.querySelector('ul')
+const movie_section = document.querySelector('p')
+const movie_all = document.querySelector('ul')
 
 fetch("./db.json")
     .then(res => res.json())
     .then(data => {
-        Object.entries(data).forEach(movies => {
-            //console.log(movies[1][0].title)
-            film.insertAdjacentHTML('beforeend', `
-            <p><b>Title</b>: ${movies[1][0].title}</p>
-            <p><b>Runtime</b>: ${movies[1][0].runtime}</p>
-            <p><b>Showtime</b>: ${movies[1][0].showtime}</p>
-            <p><b>Description</b>: ${movies[1][0].description}</p>
-            <p><b>Available Tickets</b>: <span id="tickets">${movies[1][0].capacity - movies[1][0].tickets_sold}</span></p>
-            
-            <img src="${movies[1][0].poster}">
+        Object.entries(data).forEach(movies_list => {
+            movie_section.insertAdjacentHTML('beforeend', `
+            <br><img src="${movies_list[1][0].poster}">
+            <p><b>Title</b>: ${movies_list[1][0].title}</p>
+            <p><b>Runtime</b>: ${movies_list[1][0].runtime}</p>
+            <p><b>Showtime</b>: ${movies_list[1][0].showtime}</p>
+            <p><b>Description</b>: ${movies_list[1][0].description}</p>
+            <p><b>Remaining Tickets</b>: <span id="tickets">${movies_list[1][0].capacity - movies_list[1][0].tickets_sold}</span></p>
             
             `)
         })
 
-        Object.entries(data).forEach(movies => {
-            moviearr = movies[1]
-            Object.entries(moviearr).forEach(movie => {
-                console.log(movie[1].title)
-                list.insertAdjacentHTML('beforeend', `<li>${movie[1].title}</li>`)
+        Object.entries(data).forEach(movies_all => {
+            movies = movies_all[1]
+            Object.entries(movies).forEach(movie_1 => {
+                movie_all.insertAdjacentHTML('beforeend', `<li>${movie_1[1].title}</li>`)
 
             })
         })
     })
 
 
-function buyTickets(){
-    const tickets_available = document.getElementById('tickets')
-    const tickets = tickets_available.innerHTML
+function ticketPurchase(){
+    const remaining_tickets = document.getElementById('tickets')
+    const tickets = remaining_tickets.innerHTML
     if(tickets > 0){
         alert("Successfully Bought Ticket")
         tickets_new = tickets - 1
-        tickets_available.innerHTML = tickets_new
+        remaining_tickets.innerHTML = tickets_new
     }else{
         alert("Tickets Sold Out")
     }

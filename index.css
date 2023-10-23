@@ -1,0 +1,21 @@
+#all{
+    display:flex;
+    
+}
+.movies, h1 {
+    margin-right: 15px;
+    margin-left: 150px;
+}
+
+button{
+    height: 50px;
+    width: 200px;
+    background-color: aqua;
+}
+button:hover{
+    background-color: blue;
+}
+img{
+    height: 500px;
+    width: 300px;
+}
