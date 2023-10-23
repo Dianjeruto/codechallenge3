@@ -1,13 +1,9 @@
 const film = document.querySelector('p')
 const list = document.querySelector('ul')
-getMovies();
 
-function getMovies(){
-
-}
-fetch("http://localhost:3000/films")
+fetch("./db.json")
     .then(res => res.json())
-    .then(movies => {
+    .then(data => {
         Object.entries(data).forEach(movies => {
             //console.log(movies[1][0].title)
             film.insertAdjacentHTML('beforeend', `
@@ -44,5 +40,4 @@ function buyTickets(){
         alert("Tickets Sold Out")
     }
 }
-li .classList.add("film");
-li .classList.add("item")
+
